@@ -118,3 +118,24 @@
 2025-11-02T13:08:21.822867 USER: morning
 2025-11-02T13:08:21.822880 BOT: Visiting hours are typically 9:00 AM to 5:00 PM on weekdays. For specific doctors, please provide the doctor's name or department.
 --------------------------------------------------
+2025-11-02T23:06:58.956230 USER: I need assistance regarding football
+2025-11-02T23:06:58.956251 BOT: You can collect reports from the lab or access them online via our patient portal.
+--------------------------------------------------
+2025-11-02T23:10:46.719595 USER: hello
+2025-11-02T23:10:46.719624 BOT: Hi there! I’m HealthMate — how are you feeling?
+--------------------------------------------------
+2025-11-02T23:11:03.388578 USER: hello
+2025-11-02T23:11:03.388632 BOT: Hello! Hope you’re having a good day.
+--------------------------------------------------
+2025-11-02T23:11:09.587889 USER: hello
+2025-11-02T23:11:09.587932 BOT: Hi there! I’m HealthMate — how are you feeling?
+--------------------------------------------------
+2025-11-02T23:11:12.323418 USER: hello
+2025-11-02T23:11:12.323475 BOT: Hi there! I’m HealthMate — how are you feeling?
+--------------------------------------------------
+2025-11-02T23:11:55.900893 USER: i have had a fever since the last 2 days.
+2025-11-02T23:11:55.900932 BOT: These could be signs of infection. Please see a doctor soon and stay hydrated.
+--------------------------------------------------
+2025-11-02T23:13:45.159643 USER: i have had a vicious case of diarhea and i want help regarding my stool
+2025-11-02T23:13:45.159681 BOT: These could be signs of infection. Please see a doctor soon and stay hydrated.
+--------------------------------------------------
