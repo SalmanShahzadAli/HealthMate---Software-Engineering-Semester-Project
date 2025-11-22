@@ -26,43 +26,88 @@ export default function App() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
+      e.preventDefault();
+      setLoading(true);
+      setError('');
 
-    try {
-      if (isLogin) {
-        if (!formData.email || !formData.password) {
-          throw new Error('Please fill in all fields');
+      try {
+        if (isLogin) {
+          if (!formData.email || !formData.password) {
+            throw new Error('Please fill in all fields');
+          }
+          if (!validateEmail(formData.email)) {
+            throw new Error('Invalid email format');
+          }
+
+          // LOGIN REQUEST
+          const response = await fetch('http://localhost:5000/api/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email: formData.email,
+              password: formData.password
+            })
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.message || 'Login failed');
+          }
+
+          // Store token in browser
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+
+          console.log('Login successful!', data);
+          alert('Login successful!');
+          setFormData({ name: '', email: '', password: '', confirmPassword: '' });
+
+        } else {
+          if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
+            throw new Error('Please fill in all fields');
+          }
+          if (!validateEmail(formData.email)) {
+            throw new Error('Invalid email format');
+          }
+          if (formData.password.length < 6) {
+            throw new Error('Password must be at least 6 characters');
+          }
+          if (formData.password !== formData.confirmPassword) {
+            throw new Error('Passwords do not match');
+          }
+
+          // REGISTER REQUEST
+          const response = await fetch('http://localhost:5000/api/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              name: formData.name,
+              email: formData.email,
+              password: formData.password
+            })
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.message || 'Registration failed');
+          }
+
+          console.log('Registration successful!', data);
+          alert('Registration successful! Now login.');
+          setIsLogin(true);
+          setFormData({ name: '', email: '', password: '', confirmPassword: '' });
         }
-        if (!validateEmail(formData.email)) {
-          throw new Error('Invalid email format');
-        }
-        console.log('Login:', { email: formData.email, password: formData.password });
-      } else {
-        if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
-          throw new Error('Please fill in all fields');
-        }
-        if (!validateEmail(formData.email)) {
-          throw new Error('Invalid email format');
-        }
-        if (formData.password.length < 6) {
-          throw new Error('Password must be at least 6 characters');
-        }
-        if (formData.password !== formData.confirmPassword) {
-          throw new Error('Passwords do not match');
-        }
-        console.log('Register:', { name: formData.name, email: formData.email, password: formData.password });
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
-
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setFormData({ name: '', email: '', password: '', confirmPassword: '' });
-      console.log(isLogin ? 'Login successful!' : 'Registration successful!');
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
   };
 
   const toggleMode = () => {
